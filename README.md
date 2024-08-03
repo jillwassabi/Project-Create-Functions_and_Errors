@@ -1,71 +1,26 @@
 # Project-Create-Functions_and_Errors
-This Solidity program showcases error handling mechanisms using require(), assert(), and revert() statements. 
-It provides practical examples to ensure the correctness and security of smart contracts on the Ethereum blockchain.
+It contains a Solidity smart contract, SmartContract.sol, which implements the require(), assert(), and revert() statements. The require() statement functions as an input validator. Meanwhile, the assert() statement is used to detect internal errors, whereas the revert() statement is utilized to revert or undo state changes.
 
 # Functions
-updateValue(uint _newValue)
-Updates the storedValue state variable.
+Generally, SmartContract.sol is a smart contract for a basic calculator. It allows users to add, subtract, multiply, and divide two numbers. SmartContract.sol provides the following features:
 
-multiplyValues(uint _firstNum, uint _secondNum)
-Multiplies two numbers, where the first number must be non-zero and the second number must be even. 
-Returns the product of these two numbers.
+a function getSum() that accepts two unsigned integers and computes for their sum.
+a function getDifference() that accepts two unsigned integers and computes for their difference. When the subtrahend > minuend, it reverts to the initial state.
+a function getProduct() that accepts two unsigned integers and calculates their product. It also uses the assert() statement to check for multiplication overflow.
+a function getQuotient() that accepts two unsigned integers and gets their quotient. This function requires that the divisor is not equal to zero, lest an error message will prompt.
 
 # Deployment
 To deploy this contract, use any Ethereum development environment such as Remix, Truffle, or Hardhat. Ensure that your environment is configured with Solidity compiler version ^0.8.1.
 
 # Usage
-Updating the Stored Value
-Invoke the updateValue function with a new value greater than 1. 
-The function will update the storedValue state variable if the new value is different from the current stored value.
+o execute the SmartContract.sol, one may use Remix IDE. The following statements provide a step-by-step guide on how to properly run and interact with the project using Remix IDE.
 
-# Multiplying Values
-Invoke the multiplyValues function with two numbers. 
-The first number must be non-zero, and the second number must be even. 
-The function returns the product of these two numbers.
+Open Remix IDE
+Create a new file entitled SmartContract.sol, then copy and paste the provided code.
+On the left sidebar, select Solidity Compiler -> Compile SmartContract.sol. [NOTE: Compiler version should be at least 0.8.18].
+On the left sidebar, select Deploy & Run Transactions -> Deploy. Set the environment that you prefer, yet I used the default one.
+Interact with the contract by entering inputs across the getSum(), getDifference(), getProduct(), and getQuotient(). Inputs must be integers separated by commas. (Ex: 2,3).
 
-# Running the Program
-To run this program using Remix, an online Solidity IDE, follow these steps:
-
-Go to the Remix website.
-Create a new file by clicking the "+" icon in the left-hand sidebar.
-Copy and paste the Solidity code into the file.
-solidity
-Copy code
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.1;
-
-contract FunctionsAndErrors {
-    uint public storedValue;
-
-    function updateValue(uint _newValue) public {
-        require(_newValue > 1, "Value must be greater than 1");
-        assert(_newValue != storedValue);
-        storedValue = _newValue;
-    }
-
-    function multiplyValues(uint _firstNum, uint _secondNum) public pure returns (uint) {
-        require(_firstNum != 0, "First Number cannot be zero");
-        if(_secondNum % 2 != 0) {
-            revert("Second number must be an Even Number");
-        }
-        return _firstNum * _secondNum;
-    }
-}
-
-Compiling the Code
-
-Click on the "Solidity Compiler" tab in the left-hand sidebar.
-Ensure the "Compiler" option is set to a compatible version (e.g., 0.8.1).
-Click on the "Compile FunctionsAndErrors.sol" button.
-Deploying the Contract
-
-Click on the "Deploy & Run Transactions" tab in the left-hand sidebar.
-Select the FunctionsAndErrors contract from the dropdown menu.
-Click on the "Deploy" button.
-Interacting with the Contract
-
-Set a Value: Use the updateValue function with an appropriate input to set a new value.
-Multiply Values: Use the multiplyValues function with two numbers, ensuring the conditions are met.
 
 # Author
 Jill Samantha G. Alday
