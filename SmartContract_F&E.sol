@@ -1,23 +1,34 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.1;
+pragma solidity ^0.8.18;
 
-contract FunctionsAndErrors {
-
-    uint public storedValue;
-
-    function updateValue(uint _newValue) public {
-        require(_newValue > 1, "Value must be greater than 1");
-
-        assert(_newValue != storedValue);
-
-        storedValue = _newValue;   
+contract Calculator {
+    // Addition
+    function getSum(uint256 firstNumber, uint256 secondNumber) public pure returns (uint256) {
+        uint256 sum = firstNumber + secondNumber;
+        return sum; 
     }
 
-    function multiplyValues(uint _firstNum, uint _secondNum) public pure returns (uint){
-        require(_firstNum != 0, "First Number cannot be zero");
-        if(_secondNum % 2 != 0){
-            revert("Second number must be an Even Number");
+    // Subtraction
+    function getDifference(uint256 minuend, uint256 subtrahend) public pure returns (uint256) {
+        if (subtrahend > minuend) {
+            revert("Operation results in subtraction underflow. Try again."); // Prevent subtraction that results in negative number
         }
-        return _firstNum * _secondNum;
+        
+        uint difference = minuend - subtrahend;
+        return difference;
+    }
+
+    // Multiplication
+    function getProduct(uint256 firstNumber, uint256 secondNumber) public pure returns (uint256) {
+        uint256 product = firstNumber * secondNumber;
+        assert(product / firstNumber == secondNumber); // Check for multiplication overflow
+        return product;
+    }
+
+    // Division
+    function getQuotient(uint256 dividend, uint256 divisor) public pure returns (uint256) {
+        require(divisor != 0, "Division by zero is not allowed. Please input a number greater than 0."); // Check for division by zero
+        uint quotient = dividend / divisor;
+        return quotient;
     }
 }
